@@ -14,7 +14,7 @@ FLAGS 			= -fno-builtin -fno-exceptions -fno-stack-protector -nostdlib -nodefaul
 
 all: fclean
 	@mkdir -p build
-	@gcc -m32 $(FLAGS) -c src/kernel.c -o build/kernel.o
+	@gcc -m32 $(FLAGS) -c src/kernel.c -I inc -o build/kernel.o
 	@nasm -f elf32 src/boot.s -o build/boot.o
 	@echo -e '$(LIGHT_PURPLE) Built $(DARK_PURPLE)GoblinKernel $(PURPLE)!'
 	@ld -m elf_i386 -T src/linker.ld -o build/$(BIN_NAME) build/boot.o build/kernel.o > /dev/null 2>&1
@@ -24,6 +24,7 @@ all: fclean
 	@mv build/$(ISO_NAME) GoblinKernel/boot
 	@echo -e '\n$(LIGHT_PURPLE)-> make run <- $(PURPLE)to start the $(DARK_PURPLE)GoblinKernel $(PURPLE)!'
 
+m: make run
 
 re: fclean all
 

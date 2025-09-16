@@ -24,8 +24,6 @@ all: fclean
 	@mv build/$(ISO_NAME) GoblinKernel/boot
 	@echo -e '\n$(LIGHT_PURPLE)-> make run <- $(PURPLE)to start the $(DARK_PURPLE)GoblinKernel $(PURPLE)!'
 
-m: make run
-
 re: fclean all
 
 clean:

@@ -3,6 +3,8 @@
 #define VGA_WIDTH	80
 #define VGA_HEIGHT	25
 
+#define VGA_ENTRY	0xB8000
+
 enum VGAColors	//  Video Graphics Array
 {
 	VGA_BLACK,

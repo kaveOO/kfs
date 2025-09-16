@@ -5,7 +5,7 @@
 
 void WriteString(int colour, const char *string)
 {
-	char *video = (char *)0xB8000;
+	char *video = (char *)VGA_ENTRY;
 
 	while(*string)
 	{

@@ -3,7 +3,9 @@
 #define VGA_WIDTH	80
 #define VGA_HEIGHT	25
 
-#define VGA_ENTRY	0xB8000
+#define	VGA_ENTRY	(char *) 0xB8000
+
+extern char *video;
 
 enum VGAColors	//  Video Graphics Array
 {

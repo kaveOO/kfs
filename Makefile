@@ -47,5 +47,5 @@ fclean: clean
 	@echo -e '$(LIGHT_PURPLE) Deleted $(PURPLE)boot files !'
 
 run:
-	@qemu-system-i386 -cdrom GoblinKernel/boot/${ISO_NAME}
+	@qemu-system-i386 -audiodev pa,id=speaker -machine pcspk-audiodev=speaker -cdrom GoblinKernel/boot/${ISO_NAME}
 	@echo -e '$(LIGHT_PURPLE) Exited $(DARK_PURPLE)GoblinKernel $(PURPLE)!'

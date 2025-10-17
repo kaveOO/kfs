@@ -1,5 +1,15 @@
 #include "writek.h"
 
+void EraseChar()
+{
+    if (video > VGA_ENTRY) // Check for the VGA start
+	{
+        video -= 2;
+        *video = ' ';
+        *(video + 1) = 7;
+    }
+}
+
 static int HandleEscapeCharacters(char c)
 {
 	switch (c)
@@ -12,6 +22,11 @@ static int HandleEscapeCharacters(char c)
 		case '\t':
 		{
 			video += 4; // Size of the tab
+			return 1;
+		}
+		case '\b':
+		{
+			EraseChar();
 			return 1;
 		}
 	}

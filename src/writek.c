@@ -11,7 +11,8 @@ static int HandleEscapeCharacters(char c)
 		}
 		case '\t':
 		{
-			// TODO handle tab in video buffer
+			video += 4; // Size of the tab
+			return 1;
 		}
 	}
     return 0;

@@ -29,6 +29,11 @@ static int HandleEscapeCharacters(char c)
 			EraseChar();
 			return 1;
 		}
+		case '\a':
+		{
+			beep();
+			return 1;
+		}
 	}
     return 0;
 }

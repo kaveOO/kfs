@@ -1,49 +1,40 @@
 #include "types.h"
 #include "io.h"
+#include "song.h"
 
 // https://wiki.osdev.org/PC_Speaker
 
-void timer_wait(int ticks)
+static void PlaySound(uint32_t nFrequence)
 {
-	int timer_ticks = 0;
-    int eticks;
-    eticks = timer_ticks + ticks;
-
-	while (timer_ticks < eticks);
-}
-
- static void play_sound(uint32_t nFrequence) {
  	uint32_t Div;
  	uint8_t tmp;
 
-        //Set the PIT to the desired frequency
+    // Set the PIT to the desired frequency (Programmable Interval Timer)
+	// To play a square wave https://en.wikipedia.org/wiki/Pulse-width_modulation
  	Div = 1193180 / nFrequence;
  	outb(0x43, 0xb6);
- 	outb(0x42, (uint8_t) (Div) );
- 	outb(0x42, (uint8_t) (Div >> 8));
+	outb(0x42, (uint8_t) (Div) );
+	outb(0x42, (uint8_t) (Div >> 8));
 
-        //And play the sound using the PC speaker
- 	tmp = inb(0x61);
-  	if (tmp != (tmp | 3)) {
- 		outb(0x61, tmp | 3);
- 	}
- }
+	// And play the sound using the PC speaker
+ 	tmp = inb(SPEAKER_CONTROL_PORT);
 
- //make it shut up
- static void nosound() {
- 	uint8_t tmp = inb(0x61) & 0xFC;
+  	if (tmp != (tmp | 3)) // Check if speaker enabled; if not enable
+ 		outb(SPEAKER_CONTROL_PORT, tmp | 3);
+}
 
- 	outb(0x61, tmp);
- }
+//make it shut up
+static void NoSound()
+{
+ 	uint8_t tmp = inb(SPEAKER_CONTROL_PORT) & 0xFC;
+ 	outb(SPEAKER_CONTROL_PORT, tmp);
+}
 
- //Make a beep
- void beep() {
- 	 play_sound(1000);
-		for (int i = 0; i < 10000; i++)
-		{
-			outb(2, 10);
-		}
-
- 	 nosound();
-          //set_PIT_2(old_frequency);
- }
+//Make a beep
+void beep()
+{
+	PlaySound(1000);
+	for (int i = 0; i < 10000; i++)
+		outb(2, 10); // Send random value to a random port. Thanks demostanis but this is not the final way (ugly)
+	NoSound();
+}

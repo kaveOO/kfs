@@ -18,6 +18,13 @@ OBJ_ASM			= build/boot.o
 
 all: fclean build/$(BIN_NAME) build/$(ISO_NAME)
 
+install:
+	@echo -e '$(PURPLE)Installing required dependencies'
+	@sudo apt install nasm > 				/dev/null 2>&1
+	@sudo apt install grub-pc > 			/dev/null 2>&1
+	@sudo apt install xorriso > 			/dev/null 2>&1
+	@sudo apt install qemu-system-i386 > 	/dev/null 2>&1
+
 build/%.o: src/%.c
 	@mkdir -p build
 	@gcc -m32 $(FLAGS) -c $< -I inc -o $@

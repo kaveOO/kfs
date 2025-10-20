@@ -12,7 +12,7 @@ void kmain(void)
 	// beep();
 	// WriteString(VGA_PURPLE, "42 This is mandatory");
 	// writek(VGA_PURPLE, "LnKKK est le goat\a", 18);
-	writek(VGA_PURPLE, "jer\r", 4);
+	writek(VGA_PURPLE, "je\vtest\v12", 10);
 	// writek(VGA_PURPLE, "LnKKK est le goat\n", 18);
 	// writek(VGA_PURPLE, "LnKKK est le goat\n", 18);
 	// writek(VGA_PURPLE, "LnKKK est le goat\n", 18);

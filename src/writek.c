@@ -39,6 +39,11 @@ static int HandleEscapeCharacters(char c)
 			video -= (video - VGA_ENTRY);
 			return 1;
 		}
+		case '\v':
+		{
+			video += 80 * 2;
+			return 1;
+		}
 	}
     return 0;
 }

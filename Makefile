@@ -20,10 +20,10 @@ all: fclean build/$(BIN_NAME) build/$(ISO_NAME)
 
 install:
 	@echo -e '$(PURPLE)Installing required dependencies'
-	@sudo apt install nasm > 				/dev/null 2>&1
-	@sudo apt install grub-pc > 			/dev/null 2>&1
-	@sudo apt install xorriso > 			/dev/null 2>&1
-	@sudo apt install qemu-system-i386 > 	/dev/null 2>&1
+	@sudo apt install nasm
+	@sudo apt install grub-pc
+	@sudo apt install xorriso
+	@sudo apt install qemu-system-i386
 
 build/%.o: src/%.c
 	@mkdir -p build

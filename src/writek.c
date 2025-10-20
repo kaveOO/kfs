@@ -16,7 +16,7 @@ static int HandleEscapeCharacters(char c)
 	{
 		case '\n':
 		{
-			video += (80 * 2) - ((video - VGA_ENTRY) % (80 * 2)); // Move at the start of NL
+			video += (VGA_LINE) - ((video - VGA_ENTRY) % (VGA_LINE)); // Move at the start of NL
 			return 1;
 		}
 		case '\t':
@@ -41,7 +41,7 @@ static int HandleEscapeCharacters(char c)
 		}
 		case '\v':
 		{
-			video += 80 * 2;
+			video += VGA_LINE;
 			return 1;
 		}
 	}
@@ -54,6 +54,10 @@ void writek(unsigned int colour, const char *str, int len)
 	{
 		if (HandleEscapeCharacters(str[i]))
 			continue;
+		if (video == end)
+		{
+			beep();
+		}
 		*video++ = str[i];
 		*video++ = colour;
 	}

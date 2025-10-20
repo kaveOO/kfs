@@ -1,11 +1,15 @@
 #pragma once
 
-#define VGA_WIDTH	80
-#define VGA_HEIGHT	25
+#define WIDTH	80
+#define HEIGHT	25
 
 #define	VGA_ENTRY	(char *) 0xB8000
+#define VGA_LINE	WIDTH * 2
+#define VGA_SIZE	(WIDTH * HEIGHT) * 2 // Total size of VGA screen
+#define VGA_END		VGA_ENTRY + VGA_SIZE;
 
 extern char *video;
+extern char *end;
 
 enum VGAColors	//  Video Graphics Array
 {

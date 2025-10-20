@@ -34,6 +34,11 @@ static int HandleEscapeCharacters(char c)
 			beep();
 			return 1;
 		}
+		case '\r':
+		{
+			video -= (video - VGA_ENTRY);
+			return 1;
+		}
 	}
     return 0;
 }
@@ -42,10 +47,8 @@ void writek(unsigned int colour, const char *str, int len)
 {
 	for (int i = 0; i < len; i++)
 	{
-		if (HandleEscapeCharacters(str[i]) == 1)
-		{
+		if (HandleEscapeCharacters(str[i]))
 			continue;
-		}
 		*video++ = str[i];
 		*video++ = colour;
 	}

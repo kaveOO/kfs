@@ -2,12 +2,12 @@
 
 void EraseChar()
 {
-    if (video > VGA_ENTRY) // Check for the VGA start
+	if (video > VGA_ENTRY) // Check for the VGA start
 	{
-        video -= 2;
-        *video = ' ';
-        *(video + 1) = 7;
-    }
+		video -= 2;
+		*video = ' ';
+		*(video + 1) = 7;
+	}
 }
 
 static int HandleEscapeCharacters(char c)
@@ -45,7 +45,7 @@ static int HandleEscapeCharacters(char c)
 			return 1;
 		}
 	}
-    return 0;
+	return 0;
 }
 
 void writek(unsigned int colour, const char *str, int len)

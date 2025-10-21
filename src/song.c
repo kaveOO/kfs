@@ -9,7 +9,7 @@ static void PlaySound(uint32_t nFrequence)
  	uint32_t Div;
  	uint8_t tmp;
 
-    // Set the PIT to the desired frequency (Programmable Interval Timer)
+	// Set the PIT to the desired frequency (Programmable Interval Timer)
 	// To play a square wave https://en.wikipedia.org/wiki/Pulse-width_modulation
  	Div = 1193180 / nFrequence;
  	outb(0x43, 0xb6);

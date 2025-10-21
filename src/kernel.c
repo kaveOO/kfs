@@ -6,6 +6,7 @@
 #include "song.h"
 
 char *video = VGA_ENTRY;
+char *end = VGA_END;
 
 void kmain(void)
 {

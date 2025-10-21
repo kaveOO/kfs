@@ -10,6 +10,30 @@ void EraseChar()
 	}
 }
 
+void Scroll()
+{
+	for (int y = 1; y < HEIGHT; y++)
+	{
+		for (int x = 0; x < WIDTH; x++)
+		{
+            unsigned char *src = VGA_ENTRY + (y * WIDTH + x) * 2;
+            unsigned char *dst = VGA_ENTRY + ((y - 1) * WIDTH + x) * 2;
+            dst[0] = src[0]; // Character
+            dst[1] = src[1]; // Color
+		}
+	}
+
+	unsigned char *rowStart = VGA_ENTRY + ((HEIGHT - 1) * WIDTH * 2);
+
+	for (int x = 0; x < WIDTH; x++)
+	{
+		rowStart[x * 2] = ' ';
+		rowStart[x * 2] = VGA_BLACK;
+	}
+
+	video = VGA_ENTRY + ((HEIGHT - 1) * WIDTH * 2); // Cursor on the start of last line
+}
+
 static int HandleEscapeCharacters(char c)
 {
 	switch (c)
@@ -55,9 +79,7 @@ void writek(unsigned int colour, const char *str, int len)
 		if (HandleEscapeCharacters(str[i]))
 			continue;
 		if (video == end)
-		{
-			beep();
-		}
+			Scroll();
 		*video++ = str[i];
 		*video++ = colour;
 	}

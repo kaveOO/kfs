@@ -1,4 +1,5 @@
-#pragma once
+#ifndef KERNEL_H
+#define KERNEL_H
 
 #define WIDTH	80
 #define HEIGHT	25
@@ -30,3 +31,5 @@ enum VGAColors	//  Video Graphics Array
 	VGA_YELLOW,
 	VGA_WHITE,
 };
+
+#endif

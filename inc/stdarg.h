@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STDARG_H
+#define STDARG_H
 
 // https://stackoverflow.com/questions/32291808/how-to-implement-stdarg-in-c
 
@@ -14,8 +15,10 @@
 	*            define STDARG (if using ANSI C) or VARARGS.
 */
 
-typedef char 	*va_list;
+typedef char	*va_list;
 
-#define 		va_start(ap,parmn)	(void)((ap) = (char*)(&(parmn) + 1))
-#define 		va_end(ap) 			(void)((ap) = 0)
-#define 		va_arg(ap, type)	(((type*)((ap) = ((ap) + sizeof(type))))[-1])
+#define	va_start(ap,parmn)	(void)((ap) = (char*)(&(parmn) + 1))
+#define	va_end(ap) 			(void)((ap) = 0)
+#define	va_arg(ap, type)	(((type*)((ap) = ((ap) + sizeof(type))))[-1])
+
+#endif

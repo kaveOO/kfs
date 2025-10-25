@@ -3,8 +3,7 @@
 #include "types.h"
 #include "io.h"
 
-void UpdateCursor()
-{
+void UpdateCursor() {
 	uint16_t pos = (video - VGA_ENTRY) / 2; // Calculte bytes from VGA entry
 
 	outb(CURSOR_CMD, 0x0F);

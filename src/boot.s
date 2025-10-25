@@ -1,13 +1,13 @@
 BITS 32
 
 section .text
-	ALIGN 4							; Next -> multiple of 4 bytes
-	dd 0x1BADB002 					; Grub magic number https://wiki.osdev.org/Multiboot
+	ALIGN 4			; Next -> multiple of 4 bytes
+	dd 0x1BADB002	; Grub magic number https://wiki.osdev.org/Multiboot
 	dd 0x00000000
-	dd -(0x1BADB002 + 0x00000000) 	; Checksum
+	dd -(0x1BADB002 + 0x00000000)	; Checksum
 
 global start
-extern kmain						; Kernel Main
+extern kmain	; Kernel Main
 
 start:
 	cli

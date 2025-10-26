@@ -1,6 +1,6 @@
 #include "lib.h"
 
-int printk(int color, const char *str, ...) {
+int printk(unsigned int color, const char *str, ...) {
 	va_list list;
 	va_start(list, str);
 

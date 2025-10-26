@@ -1,9 +1,9 @@
 #ifndef IO_H
 #define IO_H
 
-#include "types.h"
+#include "kernel.h"
 
-void outb(uint16_t port, uint8_t val); // http://www.osdever.net/FreeVGA/vga/portidx.htm
-uint8_t inb(uint16_t port);
+void	outb(uint16_t port, uint8_t val);
+uint8_t	inb(uint16_t port);
 
 #endif

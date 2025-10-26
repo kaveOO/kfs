@@ -1,3 +1,4 @@
 build/
-kfs/
+kfs.bin
+kfs.iso
 .vscode/

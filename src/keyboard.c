@@ -2,6 +2,7 @@
 #include "io.h"
 #include "types.h"
 
+// TODO handle arrows which is required to nagivate in the terminal
 // Full US QWERTY scancode set 1 mapping (partial printable subset)
 static const char scancode_normal[128] = {
     0,  27, '1','2','3','4','5','6','7','8','9','0','-','=', '\b', '\t',

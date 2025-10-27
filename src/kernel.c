@@ -1,35 +1,17 @@
 #include "kernel.h"
+#include "types.h"
+#include "cursor.h"
+#include "io.h"
+#include "song.h"
+#include "keyboard.h"
 
-void kmain() {
+unsigned char *video = VGA_ENTRY;
+unsigned char *end = VGA_END;
+
+void kmain(void)
+{
 	vga_init();
-	printk(RED, "tesat");
-	copy_line(1, 15);
-	// clear_screen();
-	// printk(RED, "tesat\n");
-	// copy_line(0, 1);
-	// clear_line(0);
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// printk(RED, "tesat\n");
-	// clear_screen();
-	// clear_line(0);
-	// clear_line(1);
-	// clear_line(2);
-	// clear_line(3);
+	init_keyboard();
+	// If IRQs/IDT are not yet implemented, use the polling fallback to see keyboard input
+	keyboard_poll_loop();
 }

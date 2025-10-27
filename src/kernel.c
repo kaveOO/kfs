@@ -10,6 +10,7 @@ unsigned char *end = VGA_END;
 
 void kmain(void)
 {
+	vga_init();
 	init_keyboard();
 	// If IRQs/IDT are not yet implemented, use the polling fallback to see keyboard input
 	keyboard_poll_loop();

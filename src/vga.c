@@ -3,13 +3,14 @@
 unsigned char *vga		= VGA_ENTRY;
 unsigned char *vga_end	= VGA_END;
 
-
-// TODO Move scroll function from writek here and rework it
 void scroll_up() {
+	for (int y = 1; y < VGA_HEIGHT; y++) {
+		copy_line(y, y - 1);
+	}
 
-
+	clear_line(VGA_HEIGHT - 1);
+	vga = VGA_ENTRY + ((VGA_HEIGHT - 1) * VGA_WIDTH * 2);
 }
-
 
 // TODO make sure that cursor is properly updated (having doubts)
 void copy_line(int src, int dest) {

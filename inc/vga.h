@@ -49,6 +49,7 @@ void vga_init();
 void clear_line(int line);
 void clear_screen();
 void copy_line(int src, int dest);
+void scroll_up();
 
 #endif
 

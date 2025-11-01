@@ -13,6 +13,6 @@ typedef void (*irq_handler_t)(struct interrupt_registers *regs);
 void irq_install_handler(int irq, irq_handler_t handler);
 
 void init_keyboard();
-void keyboard_handler(struct interrupt_registers *regs);
+void keyboard_handler();
 // Simple polling loop (fallback) that reads port 0x60 and writes keys to screen.
 void keyboard_poll_loop(void);

@@ -57,7 +57,7 @@ void init_keyboard()
     irq_install_handler(1, keyboard_handler);
 }
 
-void keyboard_handler(struct interrupt_registers *regs)
+void keyboard_handler()
 {
     uint8_t scancode = inb(0x60);
 

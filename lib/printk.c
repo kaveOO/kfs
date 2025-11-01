@@ -12,6 +12,7 @@ int printk(unsigned int color, const char *str, ...) {
 			switch (str[i]) {
 				case 'c':
 					count += putchark(va_arg(list, int), color);
+					break;
 				case 's':
 					count += putstrk(va_arg(list, const char *), color);
 			}

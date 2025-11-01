@@ -8,7 +8,7 @@ DARK_PURPLE		=	\x1b[1m\x1b[38;2;75;0;130m
 
 ISO_NAME 		= kfs.iso
 BIN_NAME 		= kfs.bin
-FLAGS 			= -fno-builtin -fno-exceptions -fno-stack-protector -nostdlib -nodefaultlibs -Wpedantic -Wconversion
+FLAGS 			= -Wall -Wextra -Werror -fno-builtin -fno-exceptions -fno-stack-protector -nostdlib -nodefaultlibs -Wpedantic -Wconversion
 QEMU_FLAGS		= -cdrom
 
 # -audiodev pa,id=speaker -machine pcspk-audiodev=speaker -cdrom

@@ -8,5 +8,6 @@
 #include "song.h"
 #include "cursor.h"
 #include "io.h"
+#include "keyboard.h"
 
 #endif

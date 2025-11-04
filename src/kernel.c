@@ -3,10 +3,7 @@
 unsigned char *video = VGA_ENTRY;
 unsigned char *end = VGA_END;
 
-void kmain()
-{
+void kmain() {
 	vga_init();
-	// If IRQs/IDT are not yet implemented, use the polling fallback to see keyboard input
 	keyboard_poll_loop();
-
 }

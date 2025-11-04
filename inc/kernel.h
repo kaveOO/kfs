@@ -9,5 +9,6 @@
 #include "cursor.h"
 #include "io.h"
 #include "keyboard.h"
+#include "theme.h"
 
 #endif

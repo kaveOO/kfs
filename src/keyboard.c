@@ -70,6 +70,7 @@ void keyboard_poll_loop() {
         }
         if (key == 0x3A && !released) { caps_lock = !caps_lock; continue; }
         if (released) continue;
+		handle_theme(key);
 		handle_extended(scancode);
         char c = translate_scancode(scancode);
         if (c) {

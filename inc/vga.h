@@ -16,6 +16,18 @@
 extern unsigned char	*vga;
 extern unsigned char	*vga_end;
 
+// TODO Rename variables here (bullshit name)
+typedef struct screen {
+	unsigned char buffer[VGA_SIZE + 1];
+	int cursor_row;
+	int cursor_column;
+} t_screen;
+
+extern t_screen save[10];
+extern unsigned int current_screen;
+extern unsigned int g_cursor_col;
+extern unsigned int g_cursor_row;
+
 enum Colors { // https://www.fountainware.com/EXPL/vga_color_palettes.htm
 	BLACK,
 	BLUE,
@@ -35,6 +47,21 @@ enum Colors { // https://www.fountainware.com/EXPL/vga_color_palettes.htm
 	WHITE
 };
 
+enum Screens {
+	SCREEN_1,
+	SCREEN_2,
+	SCREEN_3,
+	SCREEN_4,
+	SCREEN_5,
+	SCREEN_6,
+	SCREEN_7,
+	SCREEN_8,
+	SCREEN_9,
+	SCREEN_10,
+	SCREEN_11,
+	SCREEN_12
+};
+
 #define ERASE_CHAR(vga) {		\
 	vga[0] = ' ';				\
 	vga[1] = GRAY;				\
@@ -50,6 +77,10 @@ void clear_line(int line);
 void clear_screen();
 void copy_line(int src, int dest);
 void scroll_up();
+
+#include "types.h"
+
+void screen_changer(uint8_t key);
 
 #endif
 

@@ -9,7 +9,7 @@ DARK_PURPLE		=	\x1b[1m\x1b[38;2;75;0;130m
 ISO_NAME 		= kfs.iso
 BIN_NAME 		= kfs.bin
 FLAGS 			= -Wall -Wextra -Werror -fno-builtin -fno-exceptions -fno-stack-protector -nostdlib -nodefaultlibs -Wpedantic -Wconversion
-QEMU_FLAGS		= -cdrom
+QEMU_FLAGS		= -full-screen
 
 # -audiodev pa,id=speaker -machine pcspk-audiodev=speaker -cdrom
 
@@ -62,5 +62,5 @@ fclean: clean
 	@echo -e '$(LIGHT_PURPLE) Deleted $(PURPLE)boot files !'
 
 run:
-	@qemu-system-i386 $(QEMU_FLAGS) kfs/boot/${ISO_NAME}
+	@qemu-system-i386 $(QEMU_FLAGS) -cdrom kfs/boot/${ISO_NAME}
 	@echo -e '$(LIGHT_PURPLE) Exited $(DARK_PURPLE)kfs $(PURPLE)!'

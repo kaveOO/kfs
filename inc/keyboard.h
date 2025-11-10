@@ -17,4 +17,7 @@ static const char scancode_shifted[128] = {
     '|','Z','X','C','V','B','N','M','<','>','?', 0,  '*', 0, ' '
 };
 
+extern int g_shift_down;
+extern int g_caps_lock;
+
 void keyboard_poll_loop();

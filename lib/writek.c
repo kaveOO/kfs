@@ -33,6 +33,9 @@ static int format_handler(int c)
 }
 
 int writek(int c, int len, unsigned int color) {
+	if (g_color != 42) {
+		color = g_color;
+	}
 	for (int i = 0; i < len; i++) {
 		if (format_handler(c)) {
 			continue;

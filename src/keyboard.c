@@ -1,8 +1,8 @@
 #include "keyboard.h"
 
 // Modifier state
-static int shift_down = 0;
-static int caps_lock = 0;
+int g_shift_down = 0;
+int g_caps_lock = 0;
 
 // TODO handle vga shifting when moving to the left and writing
 
@@ -40,15 +40,15 @@ static char translate_scancode(uint8_t scancode) {
     }
 
     char c = 0;
-    if (shift_down) { c = scancode_shifted[key]; }
+    if (g_shift_down) { c = scancode_shifted[key]; }
     else { c = scancode_normal[key]; }
 
     // Letter caps handling
     if (c >= 'a' && c <= 'z') {
-        if (caps_lock ^ shift_down) return (char)(c - 'a' + 'A');
+        if (g_caps_lock ^ g_shift_down) return (char)(c - 'a' + 'A');
     }
     if (c >= 'A' && c <= 'Z') {
-        if (caps_lock ^ shift_down) return c;
+        if (g_caps_lock ^ g_shift_down) return c;
         else return (char)(c - 'A' + 'a');
     }
     return c;
@@ -65,10 +65,10 @@ void keyboard_poll_loop() {
         uint8_t key = scancode & 0x7F;
         // Modifier handling in polling mode
         if (key == 0x2A || key == 0x36) {
-            if (released) shift_down = 0; else shift_down = 1;
+            if (released) g_shift_down = 0; else g_shift_down = 1;
             continue;
         }
-        if (key == 0x3A && !released) { caps_lock = !caps_lock; continue; }
+        if (key == 0x3A && !released) { g_caps_lock = !g_caps_lock; continue; }
         if (released) continue;
 		theme_changer(key);
 		handle_extended(scancode);

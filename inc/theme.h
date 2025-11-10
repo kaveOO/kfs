@@ -6,4 +6,6 @@
 void replace_vga_theme(unsigned int color);
 void theme_changer(uint8_t key);
 
+extern unsigned int g_color;
+
 #endif

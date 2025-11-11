@@ -23,7 +23,7 @@ typedef struct screen {
 	int cursor_column;
 } t_screen;
 
-extern t_screen save[10];
+extern t_screen save[12];
 extern unsigned int current_screen;
 extern unsigned int g_cursor_col;
 extern unsigned int g_cursor_row;
@@ -77,6 +77,7 @@ void clear_line(int line);
 void clear_screen();
 void copy_line(int src, int dest);
 void scroll_up();
+void init_header();
 
 #include "types.h"
 

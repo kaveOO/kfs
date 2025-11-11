@@ -3,7 +3,7 @@
 unsigned char *vga		= VGA_ENTRY;
 unsigned char *vga_end	= VGA_END;
 
-t_screen save[10];
+t_screen save[12];
 unsigned int current_screen = 0;
 unsigned int g_cursor_col = 0;
 unsigned int g_cursor_row = 0;
@@ -48,6 +48,10 @@ static void save_screen_state() {
 	for (int i = 0; i < VGA_SIZE; i++) {
 		save[current_screen].buffer[i] = vga_start[i];
 	}
+
+	int cursor_pos = (vga - VGA_ENTRY) / 2;  // Each character is 2 bytes
+	save[current_screen].cursor_row = cursor_pos / VGA_WIDTH;
+	save[current_screen].cursor_column = cursor_pos % VGA_WIDTH;
 }
 
 static void load_screen(unsigned int screen) {
@@ -57,7 +61,10 @@ static void load_screen(unsigned int screen) {
 		vga_start[i] = save[screen].buffer[i];
 	}
 	current_screen = screen;
-	update_cursor(0, 0);
+
+	// Restore cursor position for this screen
+	vga = VGA_ENTRY + (save[screen].cursor_row * VGA_WIDTH + save[screen].cursor_column) * 2;
+	update_cursor(save[screen].cursor_row, save[screen].cursor_column);
 }
 
 void screen_changer(uint8_t key) {
@@ -110,7 +117,7 @@ void clear_line(int line) {
 	}
 }
 
-static void init_header() {
+void init_header() {
 	printk(PURPLE, "\t\t\t\t\t\t   _     __       _  _ ___\n");
 	printk(PURPLE, "\t\t\t\t\t\t  | |   / _|     | || |__ \\\n");
 	printk(PURPLE, "\t\t\t\t\t\t  | | _| |_ ___  | || |_ ) |\n");
@@ -122,7 +129,21 @@ static void init_header() {
 }
 
 void vga_init() {
+	// Initialize all screens with cursor at (0, 0) and clear buffers
+	for (int i = 0; i < 12; i++) {
+		save[i].cursor_row = 0;
+		save[i].cursor_column = 0;
+		// Initialize with empty screen
+		for (int j = 0; j < VGA_SIZE; j += 2) {
+			save[i].buffer[j] = ' ';      // Space character
+			save[i].buffer[j + 1] = GRAY; // Default color
+		}
+	}
+
 	#if HEADER == true
 		init_header();
 	#endif
+
+	// Save the initial screen state (screen 0) after header is drawn
+	save_screen_state();
 }

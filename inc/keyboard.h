@@ -21,4 +21,19 @@ extern int g_shift_down;
 extern int g_caps_lock;
 extern int g_insert_on;
 
+static const uint8_t f_keys_to_int[0x59] = {
+	[0x3B] = 1,
+	[0x3C] = 2,
+	[0x3D] = 3,
+	[0x3E] = 4,
+	[0x3F] = 5,
+	[0x40] = 6,
+	[0x41] = 7,
+	[0x42] = 8,
+	[0x43] = 9,
+	[0x44] = 10,
+	[0x57] = 11,
+	[0x58] = 12
+};
+
 void keyboard_poll_loop();

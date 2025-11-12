@@ -4,8 +4,8 @@ t_screen		g_screens[13];
 unsigned int	g_current_screen = 1;
 
 static bool get_screen_from_key(uint8_t key, unsigned int *screen_out) {
-	if (g_shift_down && key < sizeof(key_to_screen_map)) {
-		uint8_t screen = key_to_screen_map[key];
+	if (g_shift_down && key < sizeof(f_keys_to_int)) {
+		uint8_t screen = f_keys_to_int[key];
 		if (screen == g_current_screen) {
 			return false;
 		}
@@ -44,6 +44,11 @@ static void load_screen(unsigned int screen) {
 void screen_changer(uint8_t key) {
 	unsigned int screen;
 	if (get_screen_from_key(key, &screen)) {
+		if (g_screens[screen].theme == 42) {
+			g_color = 42;
+		} else {
+			g_color = g_screens[screen].theme;
+		}
 		save_screen_state();
 		load_screen(screen);
 		if (g_screens[screen].switched == false && g_current_screen != 1) {
@@ -57,6 +62,7 @@ void init_screens() {
 	for (int i = 1; i <= 12; i++) {
 		g_screens[i].cursor_col = 0;
 		g_screens[i].cursor_row = 0;
+		g_screens[i].theme = 42;
 		g_screens[i].switched = false;
 		for (int j = 0; j < VGA_SIZE; j += 2) {
 			BLANK_CELL(g_screens[i].buffer);

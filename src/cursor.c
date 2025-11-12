@@ -2,7 +2,7 @@
 
 // Cursor is moving following the video memory
 void move_cursor() {
-	int	pos = ((vga - VGA_ENTRY) / 2); // Calculte bytes from VGA entry
+	int	pos = ((g_vga - VGA_ENTRY) / 2); // Calculte bytes from VGA entry
 
 	outb(CURSOR_CMD, 0x0F);
 	outb(CURSOR_DATA, (uint8_t) (pos & 0xFF));

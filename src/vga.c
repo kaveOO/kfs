@@ -9,7 +9,7 @@ void scroll_up() {
 	}
 
 	clear_line(VGA_HEIGHT - 1);
-	vga = VGA_ENTRY + ((VGA_HEIGHT - 1) * VGA_WIDTH * 2);
+	g_vga = VGA_ENTRY + ((VGA_HEIGHT - 1) * VGA_WIDTH * 2);
 }
 
 // TODO make sure that cursor is properly updated (having doubts)

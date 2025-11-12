@@ -15,10 +15,11 @@ static void handle_extended(uint8_t scancode) {
 			// Down (handle command history)
 			break;
 		case 0x4D:
-			vga += 2;
+			g_vga += 2;
 			break;
 		case 0x4B:
-			vga -= 2;
+			g_vga -= 2;
+			break;
 			break;
 		default:
 			// Error handling here

@@ -9,9 +9,9 @@ DARK_PURPLE		=	\x1b[1m\x1b[38;2;75;0;130m
 ISO_NAME 		= kfs.iso
 BIN_NAME 		= kfs.bin
 FLAGS 			= -Wall -Wextra -Werror -fno-builtin -fno-exceptions -fno-stack-protector -nostdlib -nodefaultlibs -Wpedantic -Wconversion
-QEMU_FLAGS		= -full-screen
+QEMU_FLAGS		= -audiodev pa,id=speaker -machine pcspk-audiodev=speaker -full-screen
 
-# -audiodev pa,id=speaker -machine pcspk-audiodev=speaker -cdrom
+# -audiodev pa,id=speaker -machine pcspk-audiodev=speaker -full-screen
 
 SRC_C			= $(wildcard src/*.c)
 OBJ_C			= $(patsubst src/%.c,build/%.o,$(SRC_C))

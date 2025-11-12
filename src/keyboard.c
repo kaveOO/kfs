@@ -1,10 +1,9 @@
 #include "keyboard.h"
 
 // Modifier state
-int g_shift_down = 0;
-int g_caps_lock = 0;
-
-// TODO handle vga shifting when moving to the left and writing
+int g_shift_down = false;
+int g_caps_lock = false;
+int g_insert_on = false;
 
 static void handle_extended(uint8_t scancode) {
 	switch (scancode) {
@@ -20,6 +19,8 @@ static void handle_extended(uint8_t scancode) {
 		case 0x4B:
 			g_vga -= 2;
 			break;
+		case 0x52:
+			g_insert_on = !g_insert_on;
 			break;
 		default:
 			// Error handling here

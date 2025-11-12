@@ -8,14 +8,20 @@ static int format_handler(int c)
 			if (g_vga >= vga_end) {
 				scroll_up();
 			}
+			if (get_cursor_y() >= 11) {
+				printk(RED, "> ");
+			}
 			return 1;
 		case '\t':
+			if (get_cursor_x() > 76) {
+				scroll_up();
+			}
 			g_vga += 8;
 			return 1;
 		case '\b':
-			vga -= 2;
-			*vga++ = ' ';
-			*vga++ = GRAY;
+			if (get_cursor_x() <= 2) {
+				return 1;
+			}
 			g_vga -= 2;
 			BLANK_CELL(g_vga);
 			return 1;
@@ -42,6 +48,9 @@ int writek(int c, int len, unsigned int color) {
 		}
 		if (g_vga >= vga_end) {
 			scroll_up();
+		}
+		if (*g_vga != ' ' && !g_insert_on) {
+			shift_chars_right(g_vga);
 		}
 		*g_vga++ = (unsigned char)c;
 		*g_vga++ = (unsigned char)color;

@@ -19,5 +19,6 @@ static const char scancode_shifted[128] = {
 
 extern int g_shift_down;
 extern int g_caps_lock;
+extern int g_insert_on;
 
 void keyboard_poll_loop();

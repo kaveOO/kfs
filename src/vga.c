@@ -4,7 +4,7 @@ unsigned char *g_vga		= VGA_ENTRY;
 unsigned char *vga_end	= VGA_END;
 
 void scroll_up() {
-	for (int y = 11; y < VGA_HEIGHT; y++) {
+	for (int y = 12; y < VGA_HEIGHT; y++) {
 		copy_line(y, y - 1);
 	}
 
@@ -85,7 +85,6 @@ void init_header() {
 
 	printk(RED, "> ");
 }
-
 
 void vga_init() {
 	init_header();

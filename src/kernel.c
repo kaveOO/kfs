@@ -5,6 +5,5 @@ unsigned char *end = VGA_END;
 
 void kmain() {
 	vga_init();
-	printk(RED, "%d\n test", 2147483648);
-	// keyboard_poll_loop();
+	keyboard_poll_loop();
 }

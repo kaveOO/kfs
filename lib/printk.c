@@ -25,7 +25,10 @@ static int print_hex_low(unsigned int nb, unsigned int color) {
 static int putnbrk(int nb, unsigned int color) {
 	int count = 0;
 
-	if (nb < 0) {
+	if (nb == -2147483648) {
+		count += putstrk("-2147483648", color);
+		return count;
+	} else if (nb < 0) {
 		count += writek('-', 1, color);
 		nb = -nb;
 	} else if (nb < 10) {
@@ -40,7 +43,6 @@ static int putnbrk(int nb, unsigned int color) {
 int printk(unsigned int color, const char *str, ...) {
 	va_list list;
 	va_start(list, str);
-
 	int count = 0;
 
 	for (int i = 0; str[i]; i++) {
@@ -64,7 +66,7 @@ int printk(unsigned int color, const char *str, ...) {
 					count += print_hex_up(va_arg(list, unsigned int), color);
 					break;
 			}
-			continue;
+			i++;
 		}
 		count += writek(str[i], 1, color);
 	}

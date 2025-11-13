@@ -27,7 +27,7 @@ enum Colors { // https://www.fountainware.com/EXPL/vga_color_palettes.htm
 
 #define BLANK_CELL(g_vga) {		\
 	g_vga[0] = ' ';				\
-	g_vga[1] = GRAY;				\
+	g_vga[1] = GRAY;			\
 }
 
 #define COPY_CHAR(src, dest) {	\

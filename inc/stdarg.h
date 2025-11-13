@@ -11,8 +11,8 @@
 	* SIMULATE_STDARG
 	*
 	* WARNING: This type of stdarg makes assumptions about the stack
-	*             that may not be true on your system.  You may want to
-	*            define STDARG (if using ANSI C) or VARARGS.
+	*			 that may not be true on your system.  You may want to
+	*			define STDARG (if using ANSI C) or VARARGS.
 */
 
 typedef char	*va_list;

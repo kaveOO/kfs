@@ -1,6 +1,5 @@
 #include "cursor.h"
 
-// Cursor is moving following the video memory
 void move_cursor() {
 	int	pos = ((g_vga - VGA_ENTRY) / 2); // Calculte bytes from VGA entry
 

@@ -1,6 +1,6 @@
 #include "vga.h"
 
-unsigned char *g_vga		= VGA_ENTRY;
+unsigned char *g_vga	= VGA_ENTRY;
 unsigned char *vga_end	= VGA_END;
 
 void scroll_up() {
@@ -74,12 +74,12 @@ void shift_chars_right(unsigned char *pos) {
 void init_header() {
 	printk(RED, "\n\t\t\t\t\t\t\t\t[ Screen %d/12 ]\n", g_current_screen);
 
-	printk(PURPLE, "\t\t\t\t\t\t   _     __       _  _ ___\n");
-	printk(PURPLE, "\t\t\t\t\t\t  | |   / _|     | || |__ \\\n");
+	printk(PURPLE, "\t\t\t\t\t\t   _	 __	   _  _ ___\n");
+	printk(PURPLE, "\t\t\t\t\t\t  | |   / _|	 | || |__ \\\n");
 	printk(PURPLE, "\t\t\t\t\t\t  | | _| |_ ___  | || |_ ) |\n");
 	printk(PURPLE, "\t\t\t\t\t\t  | |/ /  _/ __| |__   _/ /\n");
-	printk(PURPLE, "\t\t\t\t\t\t  |   <| | \\__ \\    | |/ /_\n");
-	printk(PURPLE, "\t\t\t\t\t\t  |_|\\_\\_| |___/    |_|____|\n\n");
+	printk(PURPLE, "\t\t\t\t\t\t  |   <| | \\__ \\	| |/ /_\n");
+	printk(PURPLE, "\t\t\t\t\t\t  |_|\\_\\_| |___/	|_|____|\n\n");
 
 	printk(CYAN, "\t\t\t\t   Made by kaveO - https://github.com/kaveOO\n\n");
 

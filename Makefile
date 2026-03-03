@@ -37,7 +37,7 @@ build/%.o: lib/%.c
 	@mkdir -p build
 	@gcc -m32 $(FLAGS) -c $< -I inc -I lib -o $@
 
-$(OBJ_ASM): src/boot.s
+build/boot.o: src/boot.s
 	@mkdir -p build
 	@nasm -f elf32 $< -o $@
 

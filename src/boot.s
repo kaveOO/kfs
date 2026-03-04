@@ -10,6 +10,8 @@ section .text
 
 global start
 extern kmain
+global stack_bottom
+global stack_top
 
 section .gdt
 
@@ -76,7 +78,7 @@ gdtr:
 
 start:
 	cli
-	mov esp, stack_space
+	mov esp, stack_top
 	lgdt [gdtr]
 	jmp 0x08:reload_cs
 
@@ -97,5 +99,6 @@ halt_kernel:
 	jmp halt_kernel
 
 section .bss
-resb 8192
-stack_space:
+stack_bottom:
+	resb 8192
+stack_top:

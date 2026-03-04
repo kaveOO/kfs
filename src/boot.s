@@ -1,77 +1,84 @@
 BITS 32
 
 section .multiboot
-	ALIGN 4			; Next -> multiple of 4 bytes
-	dd 0x1BADB002	; Grub magic number https://wiki.osdev.org/Multiboot
+	ALIGN 4
+	dd 0x1BADB002
 	dd 0x00000000
-	dd -(0x1BADB002 + 0x00000000)	; Checksum
+	dd -(0x1BADB002 + 0x00000000)
 
 section .text
 
 global start
-extern kmain	; Kernel Main
+extern kmain
 
-null:				; 0x00
-	dq	0
+section .gdt
 
-kernel_code:		; 0x10
-	dw	0xFFFF		; limit low
-	dw	0x0000		; base low
-	db	0x00		; base middle
-	db	10011010b	; access
-	db	11001111b	; granularity
-	db	0x00		; base high
+gdt_start:
 
-kernel_data:
-	dw	0xFFFF
-	dw	0x0000
-	db	0x00
-	db	10010010b
-	db	11001111b
-	db	0x00
+gdt_null:
+	dq 0
 
-; kernel_stack:
-; 	dw	0xFFFF
-; 	dw	0x0000
-; 	db	0x00
-; 	db
-; 	db
-; 	db	0x00
+gdt_kernel_code:
+	dw 0xFFFF
+	dw 0x0000
+	db 0x00
+	db 10011010b
+	db 11001111b
+	db 0x00
 
-user_code:
-	dw	0xFFFF
-	dw	0x0000
-	db	0x00
-	db	11111010b
-	db	11001111b
-	db	0x00
+gdt_kernel_data:
+	dw 0xFFFF
+	dw 0x0000
+	db 0x00
+	db 10010010b
+	db 11001111b
+	db 0x00
 
-user_data:
-	dw	0xFFFF
-	dw	0x0000
-	db	0x00
-	db	11110010b
-	db	11001111b
-	db	0x00
+gdt_kernel_stack:
+	dw 0xFFFF
+	dw 0x0000
+	db 0x00
+	db 10010010b
+	db 11001111b
+	db 0x00
 
-; user_stack:
-; 	dw	0xFFFF
-; 	dw	0x0000
-; 	db	0x00
-; 	db
-; 	db
-; 	db	0x00
+gdt_user_code:
+	dw 0xFFFF
+	dw 0x0000
+	db 0x00
+	db 11111010b
+	db 11001111b
+	db 0x00
 
-end_of_gdt:
-toc:
-	dw end_of_gdt - null - 1	; Size of the GDT
-	dd null					; Base of GDT
+gdt_user_data:
+	dw 0xFFFF
+	dw 0x0000
+	db 0x00
+	db 11110010b
+	db 11001111b
+	db 0x00
+
+gdt_user_stack:
+	dw 0xFFFF
+	dw 0x0000
+	db 0x00
+	db 11110010b
+	db 11001111b
+	db 0x00
+
+gdt_end:
+
+section .text
+
+gdtr:
+	dw gdt_end - gdt_start - 1
+	dd gdt_start
 
 start:
 	cli
 	mov esp, stack_space
-	lgdt [toc]
-	jmp	0x08:reload_cs
+	lgdt [gdtr]
+	jmp 0x08:reload_cs
 
 reload_cs:
 	mov ax, 0x10
@@ -79,6 +86,7 @@ reload_cs:
 	mov es, ax
 	mov fs, ax
 	mov gs, ax
+	mov ax, 0x18
 	mov ss, ax
 	call kmain
 	hlt

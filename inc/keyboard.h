@@ -1,4 +1,5 @@
-#pragma once
+#ifndef KEYBOARD_H
+#define KEYBOARD_H
 
 #include "kernel.h"
 
@@ -36,3 +37,5 @@ extern int g_caps_lock;
 extern int g_insert_on;
 
 void keyboard_poll_loop();
+
+#endif

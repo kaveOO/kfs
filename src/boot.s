@@ -100,5 +100,5 @@ halt_kernel:
 
 section .bss
 stack_bottom:
-	resb 8192
+	resb 4096
 stack_top:

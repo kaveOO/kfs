@@ -6,8 +6,8 @@ DARK_PURPLE		=	\x1b[1m\x1b[38;2;75;0;130m
 
 # VARIABLES
 
-ISO_NAME 		= kfs.iso
-BIN_NAME 		= kfs.bin
+ISO_NAME 		= kaveOS.iso
+BIN_NAME 		= kaveOS.bin
 FLAGS 			= -Wall -Wextra -Werror -fno-builtin -fno-exceptions -fno-stack-protector -nostdlib -nodefaultlibs -Wpedantic -Wconversion
 QEMU_FLAGS		= -audiodev pa,id=speaker -machine pcspk-audiodev=speaker -full-screen
 
@@ -43,13 +43,13 @@ build/boot.o: src/boot.s
 
 build/$(BIN_NAME): $(OBJ_ASM) $(OBJ_C) $(OBJ_LIB)
 	@ld -m elf_i386 -T src/linker.ld -o $@ $(OBJ_ASM) $(OBJ_C) $(OBJ_LIB)
-	@echo -e '$(LIGHT_PURPLE) Linked $(DARK_PURPLE)kfs $(PURPLE)!'
+	@echo -e '$(LIGHT_PURPLE) Linked $(DARK_PURPLE)kaveOS $(PURPLE)!'
 
 build/$(ISO_NAME): build/$(BIN_NAME)
-	@mv build/$(BIN_NAME) kfs/boot/$(BIN_NAME)
-	@grub-mkrescue -o build/$(ISO_NAME) kfs/ > /dev/null 2>&1
-	@mv build/$(ISO_NAME) kfs/boot
-	@echo -e '\n$(LIGHT_PURPLE)-> make run <- $(PURPLE)to start the $(DARK_PURPLE)kfs $(PURPLE)!'
+	@mv build/$(BIN_NAME) kaveOS/boot/$(BIN_NAME)
+	@grub-mkrescue -o build/$(ISO_NAME) kaveOS/ > /dev/null 2>&1
+	@mv build/$(ISO_NAME) kaveOS/boot
+	@echo -e '\n$(LIGHT_PURPLE)-> make run <- $(PURPLE)to start the $(DARK_PURPLE)kaveOS $(PURPLE)!'
 
 re: fclean all
 
@@ -58,9 +58,9 @@ clean:
 	@echo -e '$(LIGHT_PURPLE) Deleted $(PURPLE)build folder !'
 
 fclean: clean
-	@rm -rf kfs/boot/$(BIN_NAME) kfs/boot/$(ISO_NAME)
+	@rm -rf kaveOS/boot/$(BIN_NAME) kaveOS/boot/$(ISO_NAME)
 	@echo -e '$(LIGHT_PURPLE) Deleted $(PURPLE)boot files !'
 
 run:
-	@qemu-system-i386 $(QEMU_FLAGS) -cdrom kfs/boot/${ISO_NAME}
-	@echo -e '$(LIGHT_PURPLE) Exited $(DARK_PURPLE)kfs $(PURPLE)!'
+	@qemu-system-i386 $(QEMU_FLAGS) -cdrom kaveOS/boot/${ISO_NAME}
+	@echo -e '$(LIGHT_PURPLE) Exited $(DARK_PURPLE)kaveOS $(PURPLE)!'

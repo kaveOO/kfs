@@ -11,6 +11,9 @@ global keyboard_isr
 global gdt_start
 global gdt_end
 
+global idt_start
+global idt_end
+
 section .multiboot
 	ALIGN 4
 	dd 0x1BADB002
@@ -119,6 +122,8 @@ pic_remap:
 	mov al, 0xFF
 	out 0xA1, al
 
+idt_start:
+
 set_idt_entry:
 	; eax = interrupt number
 	; ebx = handler address
@@ -145,6 +150,8 @@ keyboard_isr:
 	mov al, 0x20
 	out 0x20, al
 	iret
+
+idt_end:
 
 section .text
 

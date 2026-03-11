@@ -1,4 +1,36 @@
-#include "kernel.h"
+#include "stack.h"
+
+void print_stack(enum StackType stack) {
+	switch (stack)
+	{
+		case GDT:
+			hexdump(
+				(unsigned char *)&gdt_start,
+				(unsigned char *)&gdt_end
+			);
+			break;
+		case IDT:
+			hexdump(
+				(unsigned char *)&idt_start,
+				(unsigned char *)&idt_end
+			);
+			break;
+		case KERNEL:
+			hexdump(
+				(unsigned char *)&stack_bottom,
+				(unsigned char *)&stack_top
+			);
+			break;
+		case KERNEL_EXEC:
+			hexdump(
+				(unsigned char *)get_esp(),
+				(unsigned char *)&stack_top
+			);
+			break;
+		default:
+			break;
+	}
+}
 
 void hexdump(unsigned char *start, unsigned char *end) {
 	char hex_digits[] = "0123456789abcdef";
@@ -22,7 +54,7 @@ void hexdump(unsigned char *start, unsigned char *end) {
 		for (int i = 0; i < DUMP_SIZE; i++) {
 			unsigned char c = start[i];
 
-			if (c >= ' ' && c <= '~')
+			if (c >= 32 && c <= 126)
 				writek(c, 1, WHITE);
 			else
 				writek('.', 1, WHITE);

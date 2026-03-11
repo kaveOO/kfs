@@ -12,4 +12,8 @@ int		strncmpk(const char *s1, const char *s2, unsigned int n);
 void	*memsetk(void *ptr, int value, unsigned long num);
 int		strcmpk(const char *s1, const char *s2);
 
+static inline bool is_str_equal(const char *s1, const char *s2) {
+	return(0 == strcmpk(s1, s2));
+}
+
 #endif

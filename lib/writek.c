@@ -25,9 +25,7 @@ static int format_handler(int c)
 			g_vga -= 2;
 			BLANK_CELL(g_vga);
 			return 1;
-		case '\a':
-			beep();
-			return 1;
+		}
 		case '\r':
 			g_vga -= (g_vga - VGA_ENTRY);
 			return 1;

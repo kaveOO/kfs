@@ -19,4 +19,9 @@ typedef	signed short		int16_t;
 typedef	signed int			int32_t;
 typedef	signed long long	int64_t;
 
+typedef	char				*va_list;
+#define	va_start(ap,parmn)	(void)((ap) = (char*)(&(parmn) + 1))
+#define	va_end(ap) 			(void)((ap) = 0)
+#define	va_arg(ap, type)	(((type*)((ap) = ((ap) + sizeof(type))))[-1])
+
 #endif
